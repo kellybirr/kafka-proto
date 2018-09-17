@@ -33,4 +33,33 @@ namespace Fluffy.Kafka.Proto.Serialization
             return config;
         }
     }
+
+    /// <summary>
+    /// Used for serializing Protobuf messages for Kafka producers.
+    /// </summary>
+    public class ProtobufSerializer : ISerializer<IMessage>
+    {
+        /// <summary>
+        /// Releases any unmanaged resources owned by the object.
+        /// </summary>
+        public void Dispose() { }
+
+        /// <summary>
+        /// Serializes any <see cref="Google.Protobuf.IMessage"/> object into a byte array.
+        /// </summary>
+        /// <param name="topic">The topic associated with the data (ignored by this serializer).</param>
+        /// <param name="data">The object to serialize</param>
+        /// <returns><paramref name="data" /> encoded in a byte array (or null if <paramref name="data" /> is null).</returns>
+        public byte[] Serialize(string topic, IMessage data)
+        {
+            return data?.ToByteArray();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<KeyValuePair<string, object>> Configure(IEnumerable<KeyValuePair<string, object>> config, bool isKey)
+        {
+            return config;
+        }
+    }
+
 }

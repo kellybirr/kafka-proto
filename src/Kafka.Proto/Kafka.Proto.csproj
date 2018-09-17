@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.5</TargetFramework>
     <RootNamespace>Fluffy.Kafka.Proto</RootNamespace>
     <LangVersion>latest</LangVersion>
-    <Version>18.9.0.10</Version>
+    <Version>18.9.1.20</Version>
     <AssemblyName>Fluffy.Kafka.Proto</AssemblyName>
   </PropertyGroup>
 
