@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Fluffy.Kafka.Proto</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Version>18.9.0.10</Version>
+    <AssemblyName>Fluffy.Kafka.Proto</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.6.0" />
+    <PackageReference Include="Confluent.Kafka" Version="0.11.5" />
+  </ItemGroup>
+
+</Project>
