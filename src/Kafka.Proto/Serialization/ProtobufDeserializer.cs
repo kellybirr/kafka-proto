@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Confluent.Kafka.Serialization;
+using Confluent.Kafka;
 using Google.Protobuf;
 
-namespace Fluffy.Kafka.Proto.Serialization
+namespace Coderz.Kafka.Proto.Serialization
 {
     /// <summary>
     /// Used for deserializing Protobuf messages from Kafka consumers
@@ -30,26 +30,16 @@ namespace Fluffy.Kafka.Proto.Serialization
         }
 
         /// <summary>
-        /// Releases any unmanaged resources owned by the object.
-        /// </summary>
-        public void Dispose() { }
-
-        /// <summary>
         /// Deserializes a <typeparamref name="TMessage"/> value from a byte array.
         /// </summary>
-        /// <param name="topic">The topic associated with the data (ignored by this deserializer).</param>
         /// <param name="data">The data to deserialize.</param>
+        /// <param name="isNull">is the data or value null</param>
+        /// <param name="context">The serialization context</param>
         /// <returns><paramref name="data" /> deserialized to a <typeparamref name="TMessage"/> (or null if data is null).</returns>
-        public TMessage Deserialize(string topic, byte[] data)
+        public TMessage Deserialize(ReadOnlySpan<byte> data, bool isNull, SerializationContext context)
         {
-            if (data == null) return default;
-            return _parser.ParseFrom(data);
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<KeyValuePair<string, object>> Configure(IEnumerable<KeyValuePair<string, object>> config, bool isKey)
-        {
-            return config;
+            if (isNull || data == null) return default;
+            return _parser.ParseFrom(data.ToArray());
         }
     }
 }

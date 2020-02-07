@@ -1,15 +1,13 @@
 using System;
-using System.Collections.Generic;
-using Fluffy.Kafka.Proto.Serialization;
+using Coderz.Kafka.Proto.Serialization;
+using Fluffy.Kafka.Proto.Test;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Fluffy.Kafka.Proto.Test
+namespace Coderz.Kafka.Proto.Test
 {
     [TestClass]
     public class UnitTest1
     {
-        private const string TOPIC = "myTopic";
-
         [TestMethod]
         public void Test_RoundTrip()
         {
@@ -30,12 +28,12 @@ namespace Fluffy.Kafka.Proto.Test
             };
 
             byte[] bytes;   // serialize to bytes
-            using (var ser = new ProtobufSerializer<TestRecord>())
-                bytes = ser.Serialize(TOPIC, record);
+            var ser = new ProtobufSerializer<TestRecord>();
+            bytes = ser.Serialize(record, default);
 
             TestRecord testing; // back to object
-            using (var deSer = new ProtobufDeserializer<TestRecord>())
-                testing = deSer.Deserialize(TOPIC, bytes);
+            var deSer = new ProtobufDeserializer<TestRecord>();
+            testing = deSer.Deserialize(bytes, false,default);
 
             Assert.AreEqual(record.Id, testing.Id);
             Assert.AreEqual(record.Integer, testing.Integer);
@@ -67,12 +65,12 @@ namespace Fluffy.Kafka.Proto.Test
             };
 
             byte[] bytes;   // serialize to bytes
-            using (var ser = new ProtobufSerializer())
-                bytes = ser.Serialize(TOPIC, record);
+            var ser = new ProtobufSerializer();
+            bytes = ser.Serialize(record, default);
 
             TestRecord testing; // back to object
-            using (var deSer = new ProtobufDeserializer<TestRecord>())
-                testing = deSer.Deserialize(TOPIC, bytes);
+            var deSer = new ProtobufDeserializer<TestRecord>();
+            testing = deSer.Deserialize(bytes, false, default);
 
             Assert.AreEqual(record.Id, testing.Id);
             Assert.AreEqual(record.Integer, testing.Integer);
@@ -83,30 +81,5 @@ namespace Fluffy.Kafka.Proto.Test
             for (int i = 0; i < record.TextValues.Count; i++)
                 Assert.AreEqual(record.TextValues[i], testing.TextValues[i]);
         }
-
-        [TestMethod]
-        public void Test_Configs()
-        {
-            var startingConfig = new Dictionary<string, object> { { "bootstrap.servers", "127.0.0.1:9092" } };
-
-            using (var ser = new ProtobufSerializer<TestRecord>())
-            {
-                var cfg1 = ser.Configure(startingConfig, true);
-                Assert.AreEqual(startingConfig, cfg1);
-
-                var cfg2 = ser.Configure(startingConfig, false);
-                Assert.AreEqual(startingConfig, cfg2);
-            }
-
-            using (var deSer = new ProtobufDeserializer<TestRecord>())
-            {
-                var cfg3 = deSer.Configure(startingConfig, true);
-                Assert.AreEqual(startingConfig, cfg3);
-
-                var cfg4 = deSer.Configure(startingConfig, false);
-                Assert.AreEqual(startingConfig, cfg4);
-            }
-        }
-
     }
 }
