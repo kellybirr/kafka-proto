@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.5</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Coderz.Kafka.Proto</RootNamespace>
-    <Version>1.3.1</Version>
+    <Version>1.4.0</Version>
     <AssemblyName>Coderz.Kafka.Proto</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -11,12 +11,11 @@
     <Authors>Kelly Birr</Authors>
     <PackageProjectUrl>https://github.com/kellybirr/kafka-proto</PackageProjectUrl>
     <Description>Protobuf serialization with Kafka for .Net</Description>
-    <Product></Product>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.11.3" />
-    <PackageReference Include="Confluent.Kafka" Version="1.3.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.19.4" />
+    <PackageReference Include="Confluent.Kafka" Version="1.8.2" />
   </ItemGroup>
 
 </Project>

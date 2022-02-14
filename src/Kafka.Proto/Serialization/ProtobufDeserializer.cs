@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Confluent.Kafka;
 using Google.Protobuf;
 
@@ -39,7 +38,7 @@ namespace Coderz.Kafka.Proto.Serialization
         public TMessage Deserialize(ReadOnlySpan<byte> data, bool isNull, SerializationContext context)
         {
             if (isNull || data == null) return default;
-            return _parser.ParseFrom(data.ToArray());
+            return _parser.ParseFrom(data);
         }
     }
 }
