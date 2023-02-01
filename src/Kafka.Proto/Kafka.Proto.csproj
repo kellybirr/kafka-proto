@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Coderz.Kafka.Proto</RootNamespace>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
     <AssemblyName>Coderz.Kafka.Proto</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -14,8 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.19.4" />
-    <PackageReference Include="Confluent.Kafka" Version="1.8.2" />
+    <PackageReference Include="Google.Protobuf" Version="3.21.12" />
+    <PackageReference Include="Confluent.Kafka" Version="2.0.2" />
   </ItemGroup>
 
 </Project>
